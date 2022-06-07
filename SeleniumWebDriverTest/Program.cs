@@ -18,6 +18,10 @@ namespace SeleniumWebDriverTest
         static IWebDriver driver;
 
         /// <summary>
+        /// Link to default site
+        /// </summary>
+        static Uri uri = new Uri("https://cz.careers.veeam.com/vacancies");
+        /// <summary>
         /// Dropdown department
         /// </summary>
         static string department = "Research & Development";
@@ -38,7 +42,7 @@ namespace SeleniumWebDriverTest
             InitVariables();
             InitDriver();
 
-            ChooseLanguage();
+            ChooseLanguage("Global");
 
             GoToJobs();
 
@@ -53,15 +57,15 @@ namespace SeleniumWebDriverTest
         /// </summary>
         static void InitVariables()
         {
-
             if (!ColoredLine.YesOrNo("Change input parameters?", ConsoleColor.DarkMagenta))
                 return;
 
-            ColoredLine.Write("\nIf the field is left blank, the values will not change.\n", ConsoleColor.DarkMagenta);
+            ColoredLine.Write("\nIf the field is left blank, the values will not change.\n", ConsoleColor.Red);
 
-            department = ColoredLine.WriteAndRead(department, $"Enter {nameof(department)} in {department.GetType()} type");
-            expectedResult = ColoredLine.WriteAndRead(expectedResult, $"Enter {nameof(expectedResult)} in {expectedResult.GetType()} type");
-            timeout = ColoredLine.WriteAndRead(timeout, $"Enter {nameof(timeout)} in {timeout.GetType()} type");
+            department = ColoredLine.WriteAndRead(department, $"Enter {nameof(department)} in {department.GetType()} type", ConsoleColor.DarkMagenta);
+            expectedResult = ColoredLine.WriteAndRead(expectedResult, $"\nEnter {nameof(expectedResult)} in {expectedResult.GetType()} type", ConsoleColor.DarkMagenta);
+            timeout = ColoredLine.WriteAndRead(timeout, $"\nEnter {nameof(timeout)} in {timeout.GetType()} type", ConsoleColor.DarkMagenta);
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace SeleniumWebDriverTest
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://cz.careers.veeam.com/vacancies");
+            driver.Navigate().GoToUrl(uri);
         }
 
         #endregion
@@ -79,12 +83,12 @@ namespace SeleniumWebDriverTest
         /// <summary>
         /// Page language selection
         /// </summary>
-        static void ChooseLanguage()
+        static void ChooseLanguage(string language)
         {
             IWebElement dropBox = driver.FindElement(By.XPath("//*[@id='root']/div/header/div[1]/div/div/div/nav/nav/div/div"), timeout);
             dropBox.Click();
 
-            IWebElement dropItem = dropBox.FindChildElementByName(By.ClassName("dropdown-item"), "Global", timeout);
+            IWebElement dropItem = dropBox.FindChildElementByName(By.ClassName("dropdown-item"), language, timeout);
             dropItem.Click();
         }
 
@@ -126,9 +130,9 @@ namespace SeleniumWebDriverTest
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeout);
 
             if (vacancies.Count > expectedResult)
-                ColoredLine.Write($"Succes!!! This is more than expected vacancies by {vacancies.Count - expectedResult}!", ConsoleColor.Green);
+                ColoredLine.Write($"Succes!!! This is more than expected vacancies by {vacancies.Count - expectedResult}!\n", ConsoleColor.Green);
             else
-                ColoredLine.Write($"Failure((( This is less than expected vacancies by {expectedResult - vacancies.Count}(", ConsoleColor.Red);
+                ColoredLine.Write($"Failure((( This is less than expected vacancies by {expectedResult - vacancies.Count}(\n", ConsoleColor.Red);
         }
 
         #region FindElementWithTimeout

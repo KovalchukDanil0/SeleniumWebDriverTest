@@ -12,3 +12,7 @@ D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\bin\Debu
 D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\bin\Debug\WebDriver.Support.dll
 D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\bin\Debug\nunit.framework.dll
 D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\bin\Debug\nunit.framework.xml
+D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\bin\Debug\SeleniumWebDriverTest.exe.manifest
+D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\bin\Debug\SeleniumWebDriverTest.application
+D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\obj\Debug\SeleniumWebDriverTest.exe.manifest
+D:\Projects\VisualStudio\C#\SeleniumWebDriverTest\SeleniumWebDriverTest\obj\Debug\SeleniumWebDriverTest.application
